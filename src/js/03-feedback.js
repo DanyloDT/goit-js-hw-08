@@ -2,7 +2,7 @@ import storage from "./storag.js"
 const throttle = require('lodash.throttle');
 
 const formEl = document.querySelector('.feedback-form')
-userInfo = {}
+userInfo = {};
 
 const infoFormFields = () => {
     const infoLS = storage.load('feedback-form-state')
