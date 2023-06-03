@@ -2,7 +2,7 @@ import storage from "./storag.js"
 const throttle = require('lodash.throttle');
 
 const formEl = document.querySelector('.feedback-form')
-userInfo = {};
+const userInfo = {};
 
 const infoFormFields = () => {
     const infoLS = storage.load('feedback-form-state')
@@ -28,6 +28,8 @@ const inputFormEl = event => {
     storage.save('feedback-form-state', userInfo)
 }
 
+formEl.addEventListener('input', throttle(inputFormEl, 500))
+
 const onSubmit = event => {
     event.preventDefault()
 
@@ -43,6 +45,6 @@ const onSubmit = event => {
     console.log(userInfo);
 }
 
-formEl.addEventListener('input', throttle(inputFormEl, 500))
+
 formEl.addEventListener('submit', onSubmit)
 
