@@ -41,7 +41,7 @@ const onSubmit = event => {
     }
 
     infoEl.reset()
-    localStorage.clear()
+    localStorage.removeItem('feedback-form-state');
     console.log(userInfo);
 }
 
