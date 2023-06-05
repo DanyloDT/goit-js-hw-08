@@ -2,7 +2,7 @@ import storage from "./storag.js"
 const throttle = require('lodash.throttle');
 
 const formEl = document.querySelector('.feedback-form')
-const userInfo = {};
+let userInfo = {};
 
 const infoFormFields = () => {
     const infoLS = storage.load('feedback-form-state')
@@ -10,10 +10,10 @@ const infoFormFields = () => {
     if (infoLS === undefined) {
         return
     }
-
-    // console.log(infoLS);
+    
     for (const key in infoLS) {
         formEl.elements[key].value = infoLS[key];
+        userInfo[key] = infoLS[key]
     }
 }
 
@@ -26,6 +26,7 @@ const inputFormEl = event => {
     userInfo[infoName] = infoValue
     
     storage.save('feedback-form-state', userInfo)
+    
 }
 
 formEl.addEventListener('input', throttle(inputFormEl, 500))
@@ -41,7 +42,8 @@ const onSubmit = event => {
     }
 
     infoEl.reset()
-    localStorage.removeItem('feedback-form-state');
+    localStorage.removeItem('feedback-form-state')
+    userInfo = {}
     console.log(userInfo);
 }
 
